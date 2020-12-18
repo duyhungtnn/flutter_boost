@@ -148,6 +148,16 @@ public class XFlutterTextureView extends TextureView implements RenderSurface {
     }
   }
 
+  /**
+   * Instructs this {@code RenderSurface} to stop forwarding {@code Surface} notifications to the
+   * {@code FlutterRenderer} that was previously connected with {@link
+   * #attachToRenderer(FlutterRenderer)}.
+   */
+  @Override
+  public void pause() {
+
+  }
+
   // FlutterRenderer and getSurfaceTexture() must both be non-null.
   private void connectSurfaceToRenderer() {
     if (flutterRenderer == null || getSurfaceTexture() == null) {

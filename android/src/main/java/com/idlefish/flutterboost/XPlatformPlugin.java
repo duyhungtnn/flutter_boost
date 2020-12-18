@@ -84,12 +84,21 @@ public class XPlatformPlugin {
             XPlatformPlugin.this.setClipboardData(text);
         }
 
+        /**
+         * The Flutter application would like to know if the clipboard currently contains a string that
+         * can be pasted.
+         */
         @Override
+        public boolean clipboardHasStrings() {
+            return false;
+        }
+
+
         public List<Rect> getSystemGestureExclusionRects() {
             return XPlatformPlugin.this.getSystemGestureExclusionRects();
         }
 
-        @Override
+
         public void setSystemGestureExclusionRects(@NonNull ArrayList<Rect> rects) {
             XPlatformPlugin.this.setSystemGestureExclusionRects(rects);
         }

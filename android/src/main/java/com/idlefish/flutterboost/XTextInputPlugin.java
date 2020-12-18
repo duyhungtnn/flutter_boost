@@ -7,12 +7,14 @@ package com.idlefish.flutterboost;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 
 import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
 import android.view.View;
+import android.view.autofill.AutofillManager;
 import android.view.inputmethod.BaseInputConnection;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
@@ -97,6 +99,31 @@ public class XTextInputPlugin {
                 hideTextInput(mView);
             }
 
+            /**
+             * Requests that the autofill dropdown menu appear for the current client.
+             *
+             * <p>Has no effect if the current client does not support autofill.
+             */
+            @Override
+            public void requestAutofill() {
+
+            }
+
+            /**
+             * Requests that the {@link AutofillManager} cancel or commit the current autofill context.
+             *
+             * <p>The method calls {@link AutofillManager#commit()} when {@code
+             * shouldSave} is true, and calls {@link AutofillManager#cancel()}
+             * otherwise.
+             *
+             * @param shouldSave whether the active autofill service should save the current user input for
+             *                   future use.
+             */
+            @Override
+            public void finishAutofillContext(boolean shouldSave) {
+
+            }
+
             @Override
             public void setClient(int textInputClientId, TextInputChannel.Configuration configuration) {
                 setTextInputClient(textInputClientId, configuration);
@@ -107,6 +134,18 @@ public class XTextInputPlugin {
                 setPlatformViewTextInputClient(platformViewId);
             }
 
+            /**
+             * Sets the size and the transform matrix of the current text input client.
+             *
+             * @param width     the width of text input client. Must be finite.
+             * @param height    the height of text input client. Must be finite.
+             * @param transform a 4x4 matrix that maps the local paint coordinate system to coordinate
+             */
+            @Override
+            public void setEditableSizeAndTransform(double width, double height, double[] transform) {
+
+            }
+
             @Override
             public void setEditingState(TextInputChannel.TextEditState editingState) {
                 setTextInputEditingState(mView, editingState);
@@ -115,6 +154,20 @@ public class XTextInputPlugin {
             @Override
             public void clearClient() {
                 clearTextInputClient();
+            }
+
+            /**
+             * Sends client app private command to the current text input client(input method). The app
+             * private command result will be informed through {@code performPrivateCommand}.
+             *
+             * @param action Name of the command to be performed. This must be a scoped name. i.e. prefixed
+             *               with a package name you own, so that different developers will not create conflicting
+             *               commands.
+             * @param data   Any data to include with the command.
+             */
+            @Override
+            public void sendAppPrivateCommand(String action, Bundle data) {
+
             }
         });
         restartAlwaysRequired = isRestartAlwaysRequired();
